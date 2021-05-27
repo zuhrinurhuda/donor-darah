@@ -1,12 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { BrowserRouter, Switch } from "react-router-dom";
+import { CssBaseline } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core/styles';
+
+import App from 'views/layout/App';
+import Loading from 'views/components/Loading';
+import theme from 'views/styles/theme'
+
 import reportWebVitals from './reportWebVitals';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <React.Suspense fallback={<Loading />}>
+      <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Switch>
+            <App />
+          </Switch>
+        </BrowserRouter>
+      </ThemeProvider>
+    </React.Suspense>
   </React.StrictMode>,
   document.getElementById('root')
 );
